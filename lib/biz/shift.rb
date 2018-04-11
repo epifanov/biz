@@ -10,10 +10,10 @@ module Biz
     end
 
     def date
-      @date ||= time_segment.start_time.to_date
+      @date ||= start_time.to_date
     end
 
-    delegate contains?: :time_segment
+    delegate %i[contains? start_time end_time] => :time_segment
 
     protected
 

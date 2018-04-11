@@ -24,6 +24,7 @@ module Biz
             yielder << begin
               eligible_periods
                 .sort_by { |series| series.peek.date }
+                .first
                 .next
                 .to_time_segment
             end
