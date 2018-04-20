@@ -161,18 +161,21 @@ RSpec.describe Biz::Configuration do
     it 'returns the proper shifts' do
       expect(configuration.shifts).to eq [
         Biz::Shift.new(
+          Date.new(2006, 1, 4),
           Biz::TimeSegment.new(
             in_zone(time_zone) { Time.new(2006, 1, 4, 10) },
             in_zone(time_zone) { Time.new(2006, 1, 4, 14) }
           )
         ),
         Biz::Shift.new(
+          Date.new(2006, 1, 5),
           Biz::TimeSegment.new(
             in_zone(time_zone) { Time.new(2006, 1, 5, 11) },
             in_zone(time_zone) { Time.new(2006, 1, 5, 13) }
           )
         ),
         Biz::Shift.new(
+          Date.new(2006, 1, 5),
           Biz::TimeSegment.new(
             in_zone(time_zone) { Time.new(2006, 1, 5, 14) },
             in_zone(time_zone) { Time.new(2006, 1, 5, 16) }

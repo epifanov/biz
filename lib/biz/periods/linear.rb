@@ -19,7 +19,7 @@ module Biz
       def periods
         Enumerator.new do |yielder|
           loop do
-            intervals.next and next if intervals.peek.date == shifts.peek.date
+            intervals.next and next if intervals.peek.date == shifts.peek.date_in_timezone
 
             yielder << begin
               eligible_periods

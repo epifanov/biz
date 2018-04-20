@@ -26,7 +26,7 @@ module Biz
         raw
           .shifts
           .flat_map { |date, hours|
-            hours.map { |timestamps| Shift.new(date_period(date, timestamps)) }
+            hours.map { |timestamps| Shift.new(date, date_period(date, timestamps)) }
           }
           .sort
           .freeze

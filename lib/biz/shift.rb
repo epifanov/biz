@@ -5,8 +5,9 @@ module Biz
 
     include Comparable
 
-    def initialize(time_segment)
+    def initialize(date_in_timezone, time_segment)
       @time_segment = time_segment
+      @date_in_timezone = date_in_timezone
     end
 
     def date
@@ -28,6 +29,8 @@ module Biz
     end
 
     public
+
+    attr_reader :date_in_timezone
 
     def to_time_segment
       time_segment
