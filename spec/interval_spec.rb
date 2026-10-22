@@ -184,6 +184,15 @@ RSpec.describe Biz::Interval do
       end
     end
 
+    context 'when the interval starts on the previous day in UTC' do
+      let(:start_time) { week_minute(wday: 1, hour: 0) }
+      let(:time_zone)  { TZInfo::Timezone.get('Europe/Moscow') }
+
+      it 'dates the time segment by the local date' do
+        expect(interval.to_time_segment(week).date).to eq Date.new(2006, 1, 30)
+      end
+    end
+
     context 'when the interval covers an entire week' do
       let(:start_time) { week_minute(wday: 0, hour: 0) }
       let(:end_time)   { Biz::Time.week_minutes }

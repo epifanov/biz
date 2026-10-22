@@ -317,6 +317,28 @@ RSpec.describe Biz::Periods::Before do
     end
   end
 
+  context 'when hours start on the previous day in UTC' do
+    let(:hours)     { {tue: {'00:00' => '24:00'}, wed: {'00:00' => '24:00'}} }
+    let(:shifts)    { {Date.new(2006, 1, 4) => {'00:00' => '12:00'}} }
+    let(:holidays)  { [] }
+    let(:time_zone) { 'Europe/Moscow' }
+
+    let(:origin) { in_zone('Europe/Moscow') { Time.utc(2006, 1, 5) } }
+
+    it 'replaces the hours on the date of the shift' do
+      expect(periods.take(2).to_a).to eq [
+        Biz::TimeSegment.new(
+          in_zone('Europe/Moscow') { Time.utc(2006, 1, 4) },
+          in_zone('Europe/Moscow') { Time.utc(2006, 1, 4, 12) }
+        ),
+        Biz::TimeSegment.new(
+          in_zone('Europe/Moscow') { Time.utc(2006, 1, 3) },
+          in_zone('Europe/Moscow') { Time.utc(2006, 1, 4) }
+        )
+      ]
+    end
+  end
+
   context 'when the origin is near the end of the week' do
     let(:hours)     { {sun: {'06:00' => '18:00'}} }
     let(:time_zone) { 'Asia/Brunei' }

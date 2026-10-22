@@ -54,6 +54,16 @@ RSpec.describe Biz::TimeSegment do
     it 'returns the date corresponding with the start time' do
       expect(time_segment.date).to eq Date.new(2006, 1, 8)
     end
+
+    context 'when a date is provided' do
+      let(:time_segment) {
+        described_class.new(start_time, end_time, Date.new(2006, 1, 9))
+      }
+
+      it 'returns the provided date' do
+        expect(time_segment.date).to eq Date.new(2006, 1, 9)
+      end
+    end
   end
 
   describe '#endpoints' do

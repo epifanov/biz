@@ -45,7 +45,8 @@ module Biz
       TimeSegment.new(
         *endpoints.map { |endpoint|
           Time.new(time_zone).during_week(week, endpoint)
-        }
+        },
+        week.start_date + start_time.wday
       )
     end
 

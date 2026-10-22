@@ -177,6 +177,15 @@ RSpec.describe Biz::Configuration do
       ]
     end
 
+    context 'when a shift starts on the previous day in UTC' do
+      let(:shifts)    { {Date.new(2006, 1, 4) => {'00:00' => '14:00'}} }
+      let(:time_zone) { 'Europe/Moscow' }
+
+      it 'dates the shift by its configured date' do
+        expect(configuration.shifts.map(&:date)).to eq [Date.new(2006, 1, 4)]
+      end
+    end
+
     context 'when unconfigured' do
       subject(:configuration) { Biz::Configuration.new do end }
 
